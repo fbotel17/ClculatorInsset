@@ -2,6 +2,8 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:menu="urn:import:org.insset.client.menu">
     <g:HTMLPanel>
+        <menu:Menu ui:field="menu"/>
+        <h1>Projet de mise en pratique Scrum</h1> 
         <g:Label text="Nombre 1:" />
         <g:TextBox ui:field="nombre1" /> <!-- Renommé en nombre1 -->
         
