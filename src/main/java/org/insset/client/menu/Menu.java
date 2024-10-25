@@ -30,11 +30,6 @@ public class Menu extends Composite {
      * Menu : accueil
      */
     @UiField
-    public MenuItem pourcentage;
-    /**
-     * Menu : accueil
-     */
-    @UiField
     public MenuItem romain;
 
     interface MenuUiBinder extends UiBinder<HTMLPanel, Menu> {
@@ -54,14 +49,6 @@ public class Menu extends Composite {
             public void execute() {
 
                 History.newItem("exemple", true);
-            }
-        });
-        pourcentage.setScheduledCommand(new Scheduler.ScheduledCommand() {
-
-            @Override
-            public void execute() {
-
-                History.newItem("pourcentage", true);
             }
         });
         romain.setScheduledCommand(new Scheduler.ScheduledCommand() {

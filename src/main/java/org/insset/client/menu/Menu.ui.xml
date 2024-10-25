@@ -4,9 +4,8 @@
   <g:HTMLPanel>
     <div>
         <g:MenuBar ui:field="menu">
-           <g:MenuItem ui:field="accueil">Exemple</g:MenuItem>
+           <g:MenuItem ui:field="accueil">Pourcentage</g:MenuItem>
            <g:MenuItem ui:field="romain">Romain</g:MenuItem>
-           <g:MenuItem ui:field="pourcentage">Pourcentage</g:MenuItem>
         </g:MenuBar>
 
     </div>

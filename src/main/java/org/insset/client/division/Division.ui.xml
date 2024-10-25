@@ -1,0 +1,10 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+    <g:VerticalPanel>
+        <g:TextBox ui:field="txtNumber1" placeholder="Entrez le premier nombre"/>
+        <g:TextBox ui:field="txtNumber2" placeholder="Entrez le deuxième nombre"/>
+        <g:Button ui:field="divideButton" text="Diviser"/>
+        <g:Label ui:field="resultLabel" />
+    </g:VerticalPanel>
+</ui:UiBinder>

@@ -32,6 +32,7 @@
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>calculatorInsset.html</welcome-file>
+    <welcome-file>division.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
