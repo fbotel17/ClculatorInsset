@@ -8,7 +8,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("exemple")
 public interface ExempleService extends RemoteService {
-
+    Integer calculerPrixAvecPourcentage(int prix, int pourcentage);
+    Integer calculerPrixDepartAvecPourcentage(int montant, int pourcentage);
     String inverserChaine(String name) throws IllegalArgumentException;
     Integer diviserEntiers(int a, int b) throws IllegalArgumentException;
 }

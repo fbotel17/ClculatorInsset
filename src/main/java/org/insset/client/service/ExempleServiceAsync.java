@@ -13,6 +13,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
  * @author user
  */
 public interface ExempleServiceAsync {
+   void calculerPrixAvecPourcentage(int prix, int pourcentage, AsyncCallback<Integer> callback);
+   void calculerPrixDepartAvecPourcentage(int montant, int pourcentage, AsyncCallback<Integer> callback);
   void inverserChaine(String name, AsyncCallback<String> callback);
   void diviserEntiers(int a, int b, AsyncCallback<Integer> callback);
 }

@@ -5,7 +5,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -19,15 +18,33 @@ import org.insset.client.service.ExempleServiceAsync;
 public class ExemplePresenter extends Composite {
 
     @UiField
-    public ResetButton boutonClear;
+    public TextBox prixDepart;
     @UiField
-    public SubmitButton boutonEnvoyer;
+    public TextBox pourcentage;
     @UiField
-    public TextBox nombre1;
+    public TextBox montantFinal;
     @UiField
-    public TextBox nombre2;
+    public TextBox pourcentageInverse;
+
+    @UiField
+    public Label resultatPrixPourcentage;
+    @UiField
+    public Label resultatMontantFinal;
     @UiField
     public Label errorLabel;
+
+    @UiField
+    public ResetButton clearPrixDepart;
+    @UiField
+    public ResetButton clearPourcentage;
+    @UiField
+    public ResetButton clearMontantFinal;
+    @UiField
+    public ResetButton clearPourcentageInverse;
+    @UiField
+    public SubmitButton boutonEnvoyerPrixPourcentage;
+    @UiField
+    public SubmitButton boutonEnvoyerMontantPourcentage;
 
     private final ExempleServiceAsync service = GWT.create(ExempleService.class);
 
@@ -42,46 +59,80 @@ public class ExemplePresenter extends Composite {
     }
 
     protected void initHandler() {
-        boutonClear.addClickHandler(new ClickHandler() {
+        clearPrixDepart.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                nombre1.setText("");
-                nombre2.setText("");
-                errorLabel.setText("");
+                prixDepart.setText("");
+                resultatPrixPourcentage.setText(""); // Reset the result label
             }
         });
 
-        boutonEnvoyer.addClickHandler(new ClickHandler() {
+        clearPourcentage.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                envoyerDivision();
+                pourcentage.setText("");
             }
         });
-    }
 
-    /**
-     * Envoie les valeurs pour la division au service
-     */
-    private void envoyerDivision() {
-        errorLabel.setText(""); // Réinitialiser le message d'erreur
+        clearMontantFinal.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                montantFinal.setText("");
+                resultatMontantFinal.setText(""); // Reset the result label
+            }
+        });
 
-        try {
-            int valeur1 = Integer.parseInt(nombre1.getText());
-            int valeur2 = Integer.parseInt(nombre2.getText());
+        clearPourcentageInverse.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                pourcentageInverse.setText("");
+            }
+        });
 
-            service.diviserEntiers(valeur1, valeur2, new AsyncCallback<Integer>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    errorLabel.setText("Erreur : " + caught.getMessage());
+        boutonEnvoyerPrixPourcentage.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                try {
+                    int prix = Integer.parseInt(prixDepart.getText());
+                    int pct = Integer.parseInt(pourcentage.getText());
+                    service.calculerPrixAvecPourcentage(prix, pct, new AsyncCallback<Integer>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            resultatPrixPourcentage.setText("Erreur : " + caught.getMessage());
+                        }
+
+                        @Override
+                        public void onSuccess(Integer result) {
+                            resultatPrixPourcentage.setText("Résultat : " + result + " €");
+                        }
+                    });
+                } catch (NumberFormatException e) {
+                    resultatPrixPourcentage.setText("Erreur : veuillez entrer des nombres valides.");
                 }
+            }
+        });
 
-                @Override
-                public void onSuccess(Integer result) {
-                    errorLabel.setText("Résultat : " + result);
+        boutonEnvoyerMontantPourcentage.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                try {
+                    int montant = Integer.parseInt(montantFinal.getText());
+                    int pct = Integer.parseInt(pourcentageInverse.getText());
+                    service.calculerPrixDepartAvecPourcentage(montant, pct, new AsyncCallback<Integer>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            resultatMontantFinal.setText("Erreur : " + caught.getMessage());
+                        }
+
+                        @Override
+                        public void onSuccess(Integer result) {
+                            resultatMontantFinal.setText("Résultat : " + result + " €");
+                        }
+                    });
+                } catch (NumberFormatException e) {
+                    resultatMontantFinal.setText("Erreur : veuillez entrer des nombres valides.");
                 }
-            });
-        } catch (NumberFormatException e) {
-            errorLabel.setText("Erreur : Veuillez entrer des nombres valides.");
-        }
+            }
+        });
     }
 }

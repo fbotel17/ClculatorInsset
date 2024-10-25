@@ -22,11 +22,25 @@ public class ExempleServiceImpl extends RemoteServiceServlet implements
     }
     
     
-    public Integer diviserEntiers(int a, int b) throws IllegalArgumentException {
-        if (b == 0) {
-            throw new IllegalArgumentException("Division par zéro non autorisée.");
-        }
-        return a / b;  // Division entière
+    @Override
+    public Integer calculerPrixAvecPourcentage(int prix, int pourcentage) {
+        double result = prix - (prix * pourcentage / 100.0);
+        return (int) result; // Cast to int
     }
+
+    @Override
+    public Integer calculerPrixDepartAvecPourcentage(int montant, int pourcentage) {
+        double result = montant * (1 + (pourcentage / 100.0));
+        return (int) Math.round(result);
+    }
+
+    @Override
+    public Integer diviserEntiers(int valeur1, int valeur2) {
+        if (valeur2 == 0) {
+            throw new IllegalArgumentException("Division par zéro");
+        }
+        return valeur1 / valeur2;
+    }
+
 
 }

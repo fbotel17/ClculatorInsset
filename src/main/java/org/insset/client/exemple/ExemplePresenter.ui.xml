@@ -1,17 +1,32 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:menu="urn:import:org.insset.client.menu">
+
     <g:HTMLPanel>
         <menu:Menu ui:field="menu"/>
-        <h1>Projet de mise en pratique Scrum</h1> 
-        <g:Label text="Nombre 1:" />
-        <g:TextBox ui:field="nombre1" /> <!-- Renommé en nombre1 -->
-        
-        <g:Label text="Nombre 2:" />
-        <g:TextBox ui:field="nombre2" /> <!-- Renommé en nombre2 -->
+        <h1 style="text-align: center;">Calculateur de Pourcentage</h1> 
 
-        <g:ResetButton ui:field="boutonClear" text="Clear" />
-        <g:SubmitButton ui:field="boutonEnvoyer" text="Diviser" />
+        <g:Label text="Prix de départ:" />
+        <g:TextBox ui:field="prixDepart"  />
+        <g:ResetButton ui:field="clearPrixDepart" text="Effacer" />
+
+        <g:Label text="Pourcentage:" />
+        <g:TextBox ui:field="pourcentage"  />
+        <g:ResetButton ui:field="clearPourcentage" text="Effacer" />
+
+        <g:SubmitButton ui:field="boutonEnvoyerPrixPourcentage" text="Calculer le Prix avec Pourcentage" />
+        <g:Label ui:field="resultatPrixPourcentage" />
+
+        <g:Label text="Montant final:" />
+        <g:TextBox ui:field="montantFinal"  />
+        <g:ResetButton ui:field="clearMontantFinal" text="Effacer" />
+
+        <g:Label text="Pourcentage inverse:" />
+        <g:TextBox ui:field="pourcentageInverse" />
+        <g:ResetButton ui:field="clearPourcentageInverse" text="Effacer" />
+
+        <g:SubmitButton ui:field="boutonEnvoyerMontantPourcentage" text="Calculer le Prix de Départ" />
+        <g:Label ui:field="resultatMontantFinal" />
         
         <g:Label ui:field="errorLabel" />
     </g:HTMLPanel>
