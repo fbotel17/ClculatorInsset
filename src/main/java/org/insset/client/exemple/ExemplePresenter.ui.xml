@@ -4,6 +4,7 @@
 
     <g:HTMLPanel>
         <menu:Menu ui:field="menu"/>
+        
         <h1 style="text-align: center;">Calculateur de Pourcentage</h1> 
 
         <g:Label text="Prix de départ:" />
@@ -27,6 +28,17 @@
 
         <g:SubmitButton ui:field="boutonEnvoyerMontantPourcentage" text="Calculer le Prix de Départ" />
         <g:Label ui:field="resultatMontantFinal" />
+        
+        <h1>Calculatrice de Division</h1>
+        
+        <g:Label text="Nombre 1:" />
+        <g:TextBox ui:field="nombre1" />
+        
+        <g:Label text="Nombre 2:" />
+        <g:TextBox ui:field="nombre2" />
+
+        <g:ResetButton ui:field="boutonClear" text="Effacer" />
+        <g:SubmitButton ui:field="boutonEnvoyer" text="Diviser" />
         
         <g:Label ui:field="errorLabel" />
     </g:HTMLPanel>

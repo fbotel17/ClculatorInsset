@@ -27,6 +27,11 @@ public class ExemplePresenter extends Composite {
     public TextBox pourcentageInverse;
 
     @UiField
+    public TextBox nombre1; // Champs de division
+    @UiField
+    public TextBox nombre2;
+
+    @UiField
     public Label resultatPrixPourcentage;
     @UiField
     public Label resultatMontantFinal;
@@ -42,9 +47,13 @@ public class ExemplePresenter extends Composite {
     @UiField
     public ResetButton clearPourcentageInverse;
     @UiField
+    public ResetButton boutonClear; // Bouton de reset pour la division
+    @UiField
     public SubmitButton boutonEnvoyerPrixPourcentage;
     @UiField
     public SubmitButton boutonEnvoyerMontantPourcentage;
+    @UiField
+    public SubmitButton boutonEnvoyer; // Bouton pour envoyer la division
 
     private final ExempleServiceAsync service = GWT.create(ExempleService.class);
 
@@ -59,11 +68,12 @@ public class ExemplePresenter extends Composite {
     }
 
     protected void initHandler() {
+        // Handlers pour effacer les champs
         clearPrixDepart.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 prixDepart.setText("");
-                resultatPrixPourcentage.setText(""); // Reset the result label
+                resultatPrixPourcentage.setText(""); // Réinitialiser le label de résultat
             }
         });
 
@@ -78,7 +88,7 @@ public class ExemplePresenter extends Composite {
             @Override
             public void onClick(ClickEvent event) {
                 montantFinal.setText("");
-                resultatMontantFinal.setText(""); // Reset the result label
+                resultatMontantFinal.setText(""); // Réinitialiser le label de résultat
             }
         });
 
@@ -89,6 +99,16 @@ public class ExemplePresenter extends Composite {
             }
         });
 
+        boutonClear.addClickHandler(new ClickHandler() { // Handler pour le reset de division
+            @Override
+            public void onClick(ClickEvent event) {
+                nombre1.setText("");
+                nombre2.setText("");
+                errorLabel.setText("");
+            }
+        });
+
+        // Handlers pour les calculs
         boutonEnvoyerPrixPourcentage.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -134,5 +154,38 @@ public class ExemplePresenter extends Composite {
                 }
             }
         });
+
+        boutonEnvoyer.addClickHandler(new ClickHandler() { // Handler pour le calcul de division
+            @Override
+            public void onClick(ClickEvent event) {
+                envoyerDivision();
+            }
+        });
+    }
+
+    /**
+     * Envoie les valeurs pour la division au service
+     */
+    private void envoyerDivision() {
+        errorLabel.setText(""); // Réinitialiser le message d'erreur
+
+        try {
+            int valeur1 = Integer.parseInt(nombre1.getText());
+            int valeur2 = Integer.parseInt(nombre2.getText());
+
+            service.diviserEntiers(valeur1, valeur2, new AsyncCallback<Integer>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    errorLabel.setText("Erreur : " + caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(Integer result) {
+                    errorLabel.setText("Résultat : " + result);
+                }
+            });
+        } catch (NumberFormatException e) {
+            errorLabel.setText("Erreur : Veuillez entrer des nombres valides.");
+        }
     }
 }

@@ -30,8 +30,8 @@ public class ExempleServiceImpl extends RemoteServiceServlet implements
 
     @Override
     public Integer calculerPrixDepartAvecPourcentage(int montant, int pourcentage) {
-        double result = montant * (1 + (pourcentage / 100.0));
-        return (int) Math.round(result);
+        double prixInitial = montant / (1 - (pourcentage / 100.0)); // Convertir le pourcentage en fraction
+        return (int) Math.round(prixInitial);
     }
 
     @Override
