@@ -20,5 +20,13 @@ public class ExempleServiceImpl extends RemoteServiceServlet implements
         }
         return new String(envers);
     }
+    
+    
+    public Integer diviserEntiers(int a, int b) throws IllegalArgumentException {
+        if (b == 0) {
+            throw new IllegalArgumentException("Division par zéro non autorisée.");
+        }
+        return a / b;  // Division entière
+    }
 
 }

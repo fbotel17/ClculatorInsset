@@ -10,4 +10,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface ExempleService extends RemoteService {
 
     String inverserChaine(String name) throws IllegalArgumentException;
+    Integer diviserEntiers(int a, int b) throws IllegalArgumentException;
 }

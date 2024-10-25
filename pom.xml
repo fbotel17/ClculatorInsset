@@ -13,12 +13,12 @@
   <properties>
     <!-- Convenience property to set the GWT version -->
     <gwtVersion>2.7.0</gwtVersion>
-    
-    <sonar.host.url>http://localhost:9010/sonar</sonar.host.url>
 
     <!-- GWT needs at least java 1.6 -->
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    
+    <sonar.host.url>http://localhost:9010/sonar</sonar.host.url>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -116,7 +116,7 @@
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>3.6.0.1398</version>
-        </plugin>
+      </plugin>
     </plugins>
   </build>
 

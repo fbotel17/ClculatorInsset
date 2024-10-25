@@ -14,5 +14,6 @@ import com.google.gwt.user.client.rpc.RemoteService;
  */
 public interface ExempleServiceAsync {
   void inverserChaine(String name, AsyncCallback<String> callback);
+  void diviserEntiers(int a, int b, AsyncCallback<Integer> callback);
 }
 
